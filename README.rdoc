@@ -1,0 +1,9 @@
+= DESCRIPTION:
+
+Installs and configures ElasticSearch on AmazonLinux of Opsworks.
+
+= REQUIREMENTS:
+
+== Platform:
+
+For AmazonLinux only
