@@ -24,7 +24,7 @@ script "install_elasticsearch" do
   code <<-EOH
     wget "#{node.elasticsearch[:download_url]}"
     tar xvzf #{node.elasticsearch[:filename]} -C #{node.elasticsearch[:dir]}
-    ln -s #{node.elasticsearch[:home_dir]}-#{node.elasticsearch[:version]} #{node.elasticsearch[:home_dir]}
+    ln -s "#{node.elasticsearch[:home_dir]}-#{node.elasticsearch[:version]}" #{node.elasticsearch[:home_dir]}
   EOH
 end
 
