@@ -38,3 +38,28 @@ script "install_plugins" do
   EOH
 end
 
+# Create Directories
+[ node.elasticsearch[:path][:conf], node.elasticsearch[:path][:data], node.elasticsearch[:path][:logs], node.elasticsearch[:path][:pids] ].each do |path|
+  directory path do
+    owner node.elasticsearch[:user] and group node.elasticsearch[:user] and mode 0755
+    recursive true
+    action :create
+  end
+end
+
+# Configration
+template "elasticsearch.yml" do
+  path   "#{node.elasticsearch[:path][:conf]}/elasticsearch.yml"
+  source "elasticsearch.yml.erb"
+  owner node.elasticsearch[:user] and group node.elasticsearch[:user] and mode 0755
+
+  #notifies :restart, 'service[elasticsearch]'
+end
+
+# Monitoring by Monit
+
+# Init File
+#template "/etc/init.d/elasticsearch" do
+#  source "elasticsearch.init.erb"
+#  owner 'root' and mode 0755
+#end
