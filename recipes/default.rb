@@ -9,7 +9,7 @@ end
 
 user node.elasticsearch[:user] do
   comment "ElasticSearch User"
-  home    "#{node.elasticsearch[:dir]}/elasticsearch"
+  home    "/home/elasticsearch"
   shell   "/bin/bash"
   gid     node.elasticsearch[:user]
   supports :manage_home => false
@@ -26,6 +26,11 @@ script "install_elasticsearch" do
     tar xvzf #{node.elasticsearch[:filename]} -C #{node.elasticsearch[:dir]}
     ln -s "#{node.elasticsearch[:home_dir]}-#{node.elasticsearch[:version]}" #{node.elasticsearch[:home_dir]}
   EOH
+end
+
+# Create Symlink
+  link "#{node.elasticsearch[:home_dir]}" do
+  to "#{node.elasticsearch[:home_dir]}-#{node.elasticsearch[:version]}"
 end
 
 # Install Kuromoji plugin
