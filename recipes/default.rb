@@ -35,7 +35,7 @@ end
 # Auto start
 service "elasticsearch" do
   supports :status => true, :restart => true
-  action [ :enable ]
+  action [ :start ]
 end
 
 # Monitoring by Monit
