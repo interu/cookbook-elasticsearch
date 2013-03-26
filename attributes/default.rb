@@ -10,6 +10,7 @@ default.elasticsearch[:download_url]  = [node.elasticsearch[:host], node.elastic
 default.elasticsearch[:dir]       = "/opt"
 default.elasticsearch[:user]      = "elasticsearch"
 default.elasticsearch[:home_dir]  = [node.elasticsearch[:dir], node.elasticsearch[:user]].join('/')
+default.elasticsearch[:command_path]  = [node.elasticsearch[:home_dir], 'bin', 'elasticsearch'].join('/')
 
 default.elasticsearch[:path][:conf] = [node.elasticsearch[:home_dir], "config"].join('/')
 default.elasticsearch[:path][:data] = [node.elasticsearch[:home_dir], "data"].join('/')
