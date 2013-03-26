@@ -5,7 +5,7 @@
 # chkconfig:   - 57 47
 # description: elasticsearch
 # processname: elasticsearch
-# config:      <%= node[:elasticsearch][:path][:conf] %>/elasticsearch.yml
+# config:      <%= node.elasticsearch[:path][:conf] %>/elasticsearch.yml
 
 # Source networking configuration
 if [ -f /etc/sysconfig/network ]; then source /etc/sysconfig/network; fi

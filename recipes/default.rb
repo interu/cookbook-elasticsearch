@@ -61,9 +61,29 @@ template "elasticsearch.yml" do
   #notifies :restart, 'service[elasticsearch]'
 end
 
-# Monitoring by Monit
+template "elasticsearch-env.sh" do
+  path   "#{node.elasticsearch[:path][:conf]}/elasticsearch-env.sh"
+  source "elasticsearch-env.sh.erb"
+  owner node.elasticsearch[:user] and group node.elasticsearch[:user] and mode 0755
+end
+
 
 # Init File
+template "elasticsearch.init" do
+  path   "/etc/init.d/elasticsearch"
+  source "elasticsearch.init.erb"
+  owner 'root' and mode 0755
+end
+
+# Auto start
+service "elasticsearch" do
+  supports :status => true, :restart => true
+  action [ :enable ]
+end
+
+
+# Monitoring by Monit
+
 #template "/etc/init.d/elasticsearch" do
 #  source "elasticsearch.init.erb"
 #  owner 'root' and mode 0755
